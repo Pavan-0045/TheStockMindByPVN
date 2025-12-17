@@ -1,13 +1,16 @@
 import React from "react";
 import { FiDownload } from "react-icons/fi";
-
-export default function ExportButton({ onClick, label = "Export" }) {
+ 
+const ExportButton = () => {
   return (
-    <button
-      onClick={onClick}
-      className="flex items-center gap-2 border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-50 h-10"
-    >
-      <FiDownload /> {label}
+    <button className="flex items-center bg-purple-600 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-purple-700 shadow-sm">
+      <FiDownload
+        style={{ width: "24.17px", height: "20px" }}
+        className="mr-2"
+      />
+      Export
     </button>
   );
-}
+};
+ 
+export default ExportButton;

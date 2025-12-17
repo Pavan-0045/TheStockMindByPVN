@@ -1,176 +1,189 @@
+import {
+    Bars3Icon,
+    XMarkIcon,
+    MagnifyingGlassIcon,
+    ArrowRightStartOnRectangleIcon,
+    HomeIcon,
+    ShoppingCartIcon,
+    UsersIcon,
+    ChartPieIcon,
+    BuildingStorefrontIcon,
+    CreditCardIcon,
+    UserGroupIcon,
+    LifebuoyIcon,
+    Cog8ToothIcon,
+    ChevronDownIcon,
+} from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  HomeIcon,
-  CubeIcon,
-  TruckIcon,
-  Squares2X2Icon,
-  BanknotesIcon,
-  UsersIcon,
-  LifebuoyIcon,
-  Cog8ToothIcon,
-  Bars3Icon,
-  XMarkIcon,
-  ChevronDownIcon,
-  MagnifyingGlassIcon,
-  ChartBarIcon,
-  ArrowRightStartOnRectangleIcon,
-  PaperAirplaneIcon,
-  PaperClipIcon,
-  BookOpenIcon,
-  PercentBadgeIcon,
-  DocumentChartBarIcon,
-  PresentationChartBarIcon,
-} from "@heroicons/react/24/outline";
+
+const menuItems = [
+    { name: "Overview", icon: HomeIcon, path: "/" },
+    { name: "Products", icon: ShoppingCartIcon, path: "/products" },
+    { name: "Supplier", icon: UsersIcon, path: "/supplier" },
+    { name: "Category", icon: ChartPieIcon, path: "/category" },
+    { name: "Warehouse", icon: BuildingStorefrontIcon, path: "/warehouse" },
+    { name: "Payment", icon: CreditCardIcon, path: "/payment" },
+    { name: "Roles", icon: UserGroupIcon, path: "/roles" },
+    { name: "Support", icon: LifebuoyIcon, path: "/support" },
+    { name: "Settings", icon: Cog8ToothIcon, path: "/settings" },
+
+];
 
 export default function Sidebar() {
-  const [open, setOpen] = useState(false);
-  const [dropdown, setDropdown] = useState({
-    Payment: false,
-    Roles: false,
-    Support: false,
-  });
+    const [isOpen, setIsOpen] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState(null);
 
-  const menu = [
-    { name: "Overview", icon: HomeIcon, path: "/overview" },
-    { name: "Products", icon: CubeIcon, path: "/products" },
-    { name: "Supplier", icon: TruckIcon, path: "/supplier" },
-    { name: "Category", icon: Squares2X2Icon, path: "/category" },
-    { name: "Warehouse", icon: CubeIcon, path: "/warehouse" },
-    { name: "Stock", icon: ChartBarIcon, path: "/stock" },
-    { name: "Payment", icon: BanknotesIcon, hasDropdown: true },
-    { name: "Roles", icon: UsersIcon, hasDropdown: true },
-    { name: "Support", icon: LifebuoyIcon, hasDropdown: true },
-    { name: "Invoice", icon: DocumentChartBarIcon, path: "/invoice" },
-    { name: "Settings", icon: Cog8ToothIcon, path: "/settings" },
-  ];
+    // const navigate = useNavigate();
+    // const handleLogout = () => {
+    //     localStorage.removeItem("authToken");
+    //     localStorage.removeItem("user");
 
-  return (
-    <>
-      {/* Mobile Menu Button */}
-      <button
-        className="fixed top-4 right-4 z-50 bg-purple-600 text-white p-2 rounded-lg shadow-md transition-all duration-300 md:hidden"
-        onClick={() => setOpen(!open)}
-      >
-        {open ? <XMarkIcon className="w-5 h-5" /> : <Bars3Icon className="w-5 h-5" />}
-      </button>
+    //     alert("You’ve been logged out.");
 
-      {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-lg flex flex-col justify-between transform transition-transform duration-300 z-40
-        ${open ? "translate-x-0" : "-translate-x-full"} 
-        md:translate-x-0`}
-      >
-        {/* Logo */}
-        <div className="p-6 flex items-center justify-center">
-          <img
-            src="/src/assets/Images/Vector.png"
-            alt="Logo"
-            className="w-40 object-contain"
-          />
-        </div>
+    //     navigate("/login");
+    // };
 
-        {/* Search */}
-        <div className="px-4 py-2 mt-0">
-          <div className="flex items-center gap-2 border rounded-lg px-2 py-1.5">
-            <MagnifyingGlassIcon className="w-5 h-5 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full text-sm outline-none"
-            />
-          </div>
-        </div>
+    return (
+        <>
+            {/* Mobile Toggle Button */}
+            {!isOpen && (
+                <div className="lg:hidden fixed top-4 left-4 z-50 flex items-center">
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="p-2 rounded-md focus:ring-2 focus:ring-indigo-800">
+                        <Bars3Icon className="w-6 h-6" />
+                    </button>
+                </div>
+            )}
 
-        {/* Menu */}
-        <ul className="px-2 flex-1 overflow-y-auto">
-          {menu.map((item) => (
-            <li key={item.name} className="mb-1">
-              <div
-                className="flex justify-between items-center px-4 py-2.5 rounded-lg hover:bg-purple-50 hover:text-purple-700"
-                onClick={() =>
-                  item.hasDropdown &&
-                  setDropdown((prev) => ({
-                    ...prev,
-                    [item.name]: !prev[item.name],
-                  }))
-                }
-              >
-                {item.path ? (
-                  <NavLink
-                    to={item.path}
-                    className={({ isActive }) =>
-                      `flex items-center gap-3 w-full transition-all duration-200 ${
+            {/* Sidebar */}
+            <div
+                className={`fixed lg:static top-0 left-0 z-40 h-screen w-64 bg-white shadow-lg p-4
+                flex flex-col transform transition-transform duration-300 ${
+                    isOpen ? "translate-x-0" : "-translate-x-full"
+                } lg:translate-x-0`}>
+                {/* Logo + Search */}
+                <div className="flex flex-col items-center m-2">
+                    <div className="flex items-center justify-between w-full lg:justify-center">
+                        <img
+                            src="./src/assets/ProductImages/stack_mind.png"
+                            alt="TheStockMind Logo"
+                            className="w-40 lg:h-auto lg:w-full object-cover mb-3"
+                        />
+                        {isOpen && (
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="lg:hidden rounded-md focus:ring-2 focus:ring-indigo-800 ml-3 mb-2">
+                                <XMarkIcon className="w-8 h-8" />
+                            </button>
+                        )}
+                    </div>
+                    <div className="w-full relative mt-2">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            className="w-full px-10 py-1.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        />
+                        <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-2 top-2" />
+                    </div>
+                </div>
+
+                {/* Navigation Menu */}
+                <nav className="flex-1 overflow-y-auto">
+                    {menuItems.map((item) => {
+                        if (item.name === "Overview" || item.name === "Settings") {
+                            return (
+                                <NavLink
+                                    key={item.name}
+                                    to={item.path}
+                                    className={({ isActive }) =>
+                                        `flex items-center w-full px-3 py-2 rounded-lg transition
+                    ${
                         isActive
-                          ? "text-purple-700 font-medium bg-purple-50"
-                          : "text-gray-700"
-                      }`
-                    }
-                    onClick={() => setOpen(false)}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                  </NavLink>
-                ) : (
-                  <div className="flex items-center gap-3 text-gray-700">
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                  </div>
-                )}
-                {item.hasDropdown && (
-                  <ChevronDownIcon
-                    className={`w-4 h-4 text-gray-500 transition-transform ${
-                      dropdown[item.name] ? "rotate-180" : ""
-                    }`}
-                  />
-                )}
-              </div>
+                            ? "bg-indigo-100 text-indigo-600"
+                            : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-600"
+                    }`
+                                    }
+                                    onClick={() => setIsOpen(false)}>
+                                    <item.icon className="w-5 h-5 mr-3" />
+                                    {item.name}
+                                </NavLink>
+                            );
+                        } else {
+                            const isDropdownOpen = openDropdown === item.name;
+                            return (
+                                <div key={item.name}>
+                                    <button
+                                        onClick={() =>
+                                            setOpenDropdown(isDropdownOpen ? null : item.name)
+                                        }
+                                        className="flex items-center w-full px-3 py-2 rounded-lg transition text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
+                                        <item.icon className="w-5 h-5 mr-3" />
+                                        {item.name}
+                                        <ChevronDownIcon
+                                            className={`w-4 h-4 ml-auto transition-transform ${
+                                                isDropdownOpen ? "rotate-180" : ""
+                                            }`}
+                                        />
+                                    </button>
+                                    {isDropdownOpen && (
+                                        <div className="ml-6 mt-1">
+                                            <NavLink
+                                                to={item.path}
+                                                className={({ isActive }) =>
+                                                    `flex items-center w-full px-3 py-1 rounded-lg transition text-sm
+                    ${
+                        isActive
+                            ? "bg-indigo-100 text-indigo-600"
+                            : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-600"
+                    }`
+                                                }
+                                                onClick={() => setIsOpen(false)}>
+                                                {item.name}
+                                            </NavLink>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        }
+                    })}
+                </nav>
 
-              {item.hasDropdown && dropdown[item.name] && (
-                <ul className="ml-10 mt-1 text-sm text-gray-600">
-                  <li className="py-1 hover:text-purple-600 cursor-pointer">
-                    Option 1
-                  </li>
-                  <li className="py-1 hover:text-purple-600 cursor-pointer">
-                    Option 2
-                  </li>
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
+                {/* Footer (User Info) */}
+                <div className="border-t pt-4 mt-4 text-sm text-gray-300 relative mb-4">
+                    <div className="flex items-center justify-between pl-2">
+                        {/* Admin Info */}
+                        <div className="flex items-center space-x-2">
+                            <img
+                                src="./src/assets/ProductImages/67da9fddd372b1b5b44ffef41eed6ceb810ddf8a.jpg"
+                                alt="avatar"
+                                className="rounded-full w-8 h-8"
+                            />
+                            <div>
+                                <p className="font-semibold text-gray-700">Olivia Rhye</p>
+                                <p className="text-xs text-gray-500">Admin</p>
+                            </div>
+                        </div>
 
-        {/* Admin Info */}
-        <div className="border-t border-gray-400 mx-5 mb-3 mt-2 pt-4">
-          <div className="flex items-center justify-between px-2">
-            <div className="flex items-center gap-3">
-              <img
-                src="/src/assets/Images/Avatar.png"
-                alt="Admin"
-                className="w-10 h-10 rounded-full"
-              />
-              <div>
-                <p className="font-medium text-gray-700">Olivia Rhye</p>
-                <p className="text-sm text-gray-500">Admin</p>
-              </div>
+                        {/* Logout Icon */}
+                        <button
+                            title="Logout"
+                            // onClick={handleLogout}
+                            className="pr-4 text-gray-400 hover:text-red-500 transition">
+                            <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
+                        </button>
+                    </div>
+                </div>
             </div>
-            <button
-              title="Logout"
-              className="text-gray-400 hover:text-red-500 transition"
-            >
-              <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </aside>
 
-      {/* Overlay (mobile only) */}
-      {open && (
-        <div
-          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30 md:hidden"
-          onClick={() => setOpen(false)}
-        />
-      )}
-    </>
-  );
+            {/* Backdrop for mobile */}
+            {isOpen && (
+                <div
+                    className="fixed inset-0 bg-black opacity-30 lg:hidden"
+                    onClick={() => setIsOpen(false)}
+                />
+            )}
+        </>
+    );
 }
