@@ -38,7 +38,7 @@ const BusinessForm = () => {
         <img
           src={Logo}
           alt="TheStockMind Logo"
-          className="absolute top-[29px] left-[30px] w-[249px] h-[30px] opacity-100 rotate-0"
+          className="absolute top-7.25 left-7.5 w-62.25 h-7.5 opacity-100 rotate-0"
         />
 
         <div className="max-w-md mt-32 sm:mt-40 lg:mt-0 lg:absolute lg:left-12 lg:top- [22rem]">
@@ -133,7 +133,7 @@ const BusinessForm = () => {
                 WHICH OF THE FOLLOWING BEST DESCRIBES YOU*
               </p>
               <div className="flex flex-wrap gap-4 sm:gap-6 mt-2 text-gray-700 text-sm">
-                {["Super-stockiest", "Distributor", "Retailer", "Brand"].map( //4 option creadted using map
+                {["Super-stockiest","Distributor","Retailer","Brand"].map( //4 option creadted using map
                   (role) => (
                     <label key={role} className="flex items-center gap-2"> 
                       <input

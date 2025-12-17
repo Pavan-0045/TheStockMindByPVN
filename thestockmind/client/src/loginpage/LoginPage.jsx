@@ -17,7 +17,7 @@ const LoginPage = () => {
       alert("✅ Login successful!");
       navigate("/dashboard");
     } else {
-      alert("❌ Invalid credentials. Try again."); 
+      alert("Invalid credentials. Try again."); 
     }
   };
 
@@ -110,7 +110,7 @@ const LoginPage = () => {
               className="w-full border border-gray-300 flex items-center justify-center gap-2 py-2 rounded-md hover:bg-gray-50 transition"
             >
               <img
-                src="/src/Icons/Social icon.svg"
+                src="/src/assets/Google.svg"
                 alt="Google"
                 className="w-5 h-5"
               />
